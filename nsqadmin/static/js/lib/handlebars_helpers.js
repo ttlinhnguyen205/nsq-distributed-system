@@ -300,3 +300,17 @@ Handlebars.registerPartial('warning', require('../views/warning.hbs'));
 Handlebars.registerHelper('basePath', function(p) {
     return AppState.basePath(p);
 });
+
+Handlebars.registerHelper('if_high_priority', function(topicName, options) {
+    if (topicName && topicName.indexOf('high') !== -1) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+Handlebars.registerHelper('if_normal_priority', function(topicName, options) {
+    if (topicName && topicName.indexOf('normal') !== -1) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
