@@ -1,98 +1,252 @@
-<p align="center">
-<img align="left" width="175" src="https://nsq.io/static/img/nsq_blue.png">
-<ul>
-<li><strong>Source</strong>: https://github.com/nsqio/nsq
-<li><strong>Issues</strong>: https://github.com/nsqio/nsq/issues
-<li><strong>Mailing List</strong>: <a href="https://groups.google.com/d/forum/nsq-users">nsq-users@googlegroups.com</a>
-<li><strong>IRC</strong>: #nsq on freenode
-<li><strong>Docs</strong>: https://nsq.io
-<li><strong>Twitter</strong>: <a href="https://twitter.com/nsqio">@nsqio</a>
-</ul>
-</p>
+# NSQ Distributed Messaging System
 
-[![Build Status](https://github.com/nsqio/nsq/workflows/tests/badge.svg)](https://github.com/nsqio/nsq/actions) [![GitHub release](https://img.shields.io/github/release/nsqio/nsq.svg)](https://github.com/nsqio/nsq/releases/latest) [![Coverage Status](https://coveralls.io/repos/github/nsqio/nsq/badge.svg?branch=master)](https://coveralls.io/github/nsqio/nsq?branch=master)
+## Giới thiệu
 
-**NSQ** is a realtime distributed messaging platform designed to operate at scale, handling
-billions of messages per day.
+Đây là dự án nghiên cứu và thực nghiệm hệ thống truyền thông điệp phân tán NSQ (NSQ Distributed Messaging Platform) được phát triển bằng Golang.
 
-It promotes *distributed* and *decentralized* topologies without single points of failure,
-enabling fault tolerance and high availability coupled with a reliable message delivery
-guarantee.  See [features & guarantees][features_guarantees].
+Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ thống hàng đợi thông điệp phân tán, khả năng cân bằng tải, khả năng chịu lỗi và phát triển thêm các tính năng giám sát phục vụ quản trị hệ thống.
 
-Operationally, **NSQ** is easy to configure and deploy (all parameters are specified on the command
-line and compiled binaries have no runtime dependencies). For maximum flexibility, it is agnostic to
-data format (messages can be JSON, MsgPack, Protocol Buffers, or anything else). Official Go and
-Python libraries are available out of the box (as well as many other [client
-libraries][client_libraries]), and if you're interested in building your own, there's a [protocol
-spec][protocol].
+---
 
-We publish [binary releases][installing] for Linux, Darwin, FreeBSD and Windows, as well as an official [Docker image][docker_deployment].
+## Dự án gốc
 
-NOTE: master is our *development* branch and may not be stable at all times.
+* NSQ: https://github.com/nsqio/nsq
+* Ngôn ngữ: Golang
+* Kiến trúc: Distributed Messaging System
 
-## In Production
+---
 
-<a href="https://bitly.com/"><img src="https://nsq.io/static/img/bitly_logo.png" width="84" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.life360.com/"><img src="https://nsq.io/static/img/life360_logo.png" width="100" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.simplereach.com/"><img src="https://nsq.io/static/img/simplereach_logo.png" width="136" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://moz.com/"><img src="https://nsq.io/static/img/moz_logo.png" width="108" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://segment.com/"><img src="https://nsq.io/static/img/segment_logo.png" width="70" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://eventful.com/events"><img src="https://nsq.io/static/img/eventful_logo.png" width="95" align="middle"/></a><br/>
+## Mục tiêu
 
-<a href="https://www.energyhub.com/"><img src="https://nsq.io/static/img/energyhub_logo.png" width="99" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://project-fifo.net/"><img src="https://nsq.io/static/img/project_fifo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://trendrr.com/"><img src="https://nsq.io/static/img/trendrr_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://reonomy.com/"><img src="https://nsq.io/static/img/reonomy_logo.png" width="100" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://hw-ops.com/"><img src="https://nsq.io/static/img/heavy_water.png" width="50" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.getlytics.com/"><img src="https://nsq.io/static/img/lytics.png" width="100" align="middle"/></a><br/>
+* Tìm hiểu kiến trúc NSQ
+* Cài đặt và vận hành hệ thống NSQ
+* Thực nghiệm mô hình Producer - Consumer
+* Đánh giá khả năng cân bằng tải (Load Balancing)
+* Đánh giá khả năng chịu lỗi (Fault Tolerance)
+* Phát triển các tính năng mới liên quan đến hệ thống phân tán
 
-<a href="https://mediaforge.com/"><img src="https://nsq.io/static/img/rakuten.png" width="100" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://wistia.com/"><img src="https://nsq.io/static/img/wistia_logo.png" width="140" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://stripe.com/"><img src="https://nsq.io/static/img/stripe_logo.png" width="96" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.shipwire.com/"><img src="https://nsq.io/static/img/shipwire_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://digg.com/"><img src="https://nsq.io/static/img/digg_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.scalabull.com/"><img src="https://nsq.io/static/img/scalabull_logo.png" width="97" align="middle"/></a><br/>
+---
 
-<a href="https://www.soundest.com/"><img src="https://nsq.io/static/img/soundest_logo.png" width="96" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.docker.com/"><img src="https://nsq.io/static/img/docker_logo.png" width="100" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.getweave.com/"><img src="https://nsq.io/static/img/weave_logo.png" width="94" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.augury.com/"><img src="https://nsq.io/static/img/augury_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.buzzfeed.com/"><img src="https://nsq.io/static/img/buzzfeed_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://eztable.com/"><img src="https://nsq.io/static/img/eztable_logo.png" width="97" align="middle"/></a><br/>
+## Kiến trúc hệ thống
 
-<a href="https://www.dotabuff.com/"><img src="https://nsq.io/static/img/dotabuff_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.fastly.com/"><img src="https://nsq.io/static/img/fastly_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://talky.io/"><img src="https://nsq.io/static/img/talky_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://groupme.com/"><img src="https://nsq.io/static/img/groupme_logo.png" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://wiredcraft.com/"><img src="https://nsq.io/static/img/wiredcraft_logo.jpg" width="97" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://sproutsocial.com/"><img src="https://nsq.io/static/img/sproutsocial_logo.png" width="90" align="middle"/></a><br/>
+Hệ thống bao gồm:
 
-<a href="https://fandom.wikia.com/"><img src="https://nsq.io/static/img/fandom_logo.svg" width="100" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://gitee.com/"><img src="https://nsq.io/static/img/gitee_logo.svg" width="140" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://bytedance.com/"><img src="https://nsq.io/static/img/bytedance_logo.png" width="140" align="middle"/></a>&nbsp;&nbsp;
-<a href="https://www.tokopedia.com/"><img src="https://nsq.io/static/img/tokopedia_logo.svg" width="145" align="middle"/></a><br/>
-<a href="https://www.kuafood.com/"><img src="https://nsq.io/static/img/kuafood_logo.png" width="145" align="middle"/></a><br/>
+### NSQLookupd
 
-## Code of Conduct
+* Quản lý thông tin các node NSQ
+* Hỗ trợ khám phá dịch vụ (Service Discovery)
 
-Help us keep NSQ open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+### NSQD
 
-## Authors
+* Tiếp nhận thông điệp từ Producer
+* Lưu trữ và phân phối thông điệp đến Consumer
 
-NSQ was designed and developed by Matt Reiferson ([@imsnakes][snakes_twitter]) and Jehiah Czebotar
-([@jehiah][jehiah_twitter]) but wouldn't have been possible without the support of [Bitly][bitly],
-maintainers ([Pierce Lopez][pierce_github]), and all our [contributors][contributors].
+### NSQAdmin
 
-Logo created by Wolasi Konu ([@kisalow][wolasi_twitter]).
+* Giao diện quản trị hệ thống
+* Theo dõi Topic, Channel và Consumer
 
-[protocol]: https://nsq.io/clients/tcp_protocol_spec.html
-[installing]: https://nsq.io/deployment/installing.html
-[docker_deployment]: https://nsq.io/deployment/docker.html
-[snakes_twitter]: https://twitter.com/imsnakes
-[jehiah_twitter]: https://twitter.com/jehiah
-[bitly]: https://bitly.com
-[features_guarantees]: https://nsq.io/overview/features_and_guarantees.html
-[contributors]: https://github.com/nsqio/nsq/graphs/contributors
-[client_libraries]: https://nsq.io/clients/client_libraries.html
-[wolasi_twitter]: https://twitter.com/kisalow
-[pierce_github]: https://github.com/ploxiln
+### Producer
+
+* Gửi thông điệp vào Topic
+
+### Consumer
+
+* Nhận và xử lý thông điệp từ Topic
+
+---
+
+## Cài đặt
+
+### Clone dự án
+
+```bash
+git clone https://github.com/ttlinhnguyen205/nsq-distributed-system.git
+cd nsq-distributed-system
+```
+
+### Build NSQ
+
+```bash
+make
+```
+
+---
+
+## Khởi động hệ thống
+
+### Terminal 1
+
+```bash
+go run ./apps/nsqlookupd
+```
+
+### Terminal 2
+
+```bash
+go run ./apps/nsqd --lookupd-tcp-address=127.0.0.1:4160
+```
+
+### Terminal 3
+
+```bash
+go run ./apps/nsqadmin --lookupd-http-address=127.0.0.1:4161
+```
+
+---
+
+## Thực nghiệm
+
+### Kiểm thử cân bằng tải (Load Balancing)
+
+Khởi động 2 Consumer:
+
+```bash
+go run ./apps/nsq_to_file \
+--topic=test-topic \
+--channel=demo-channel \
+--lookupd-http-address=127.0.0.1:4161 \
+--output-dir=/tmp/nsq-consumer-a
+```
+
+```bash
+go run ./apps/nsq_to_file \
+--topic=test-topic \
+--channel=demo-channel \
+--lookupd-http-address=127.0.0.1:4161 \
+--output-dir=/tmp/nsq-consumer-b
+```
+
+Gửi 100 thông điệp:
+
+```bash
+for i in {1..100}; do
+curl -s -d "Distributed Message $i" \
+"http://127.0.0.1:4151/pub?topic=test-topic"
+done
+```
+
+### Kết quả
+
+* Consumer A nhận một phần thông điệp
+* Consumer B nhận một phần thông điệp
+
+Điều này chứng minh NSQ hỗ trợ cân bằng tải giữa các Consumer.
+
+---
+
+## Kiểm thử khả năng chịu lỗi (Fault Tolerance)
+
+Dừng Consumer A:
+
+```bash
+Ctrl + C
+```
+
+Tiếp tục gửi thông điệp:
+
+```bash
+for i in {101..120}; do
+curl -s -d "Message $i" \
+"http://127.0.0.1:4151/pub?topic=test-topic"
+done
+```
+
+### Kết quả
+
+* Consumer B vẫn tiếp tục nhận và xử lý toàn bộ thông điệp.
+* Hệ thống vẫn hoạt động bình thường khi một Consumer ngừng hoạt động.
+
+Điều này chứng minh khả năng chịu lỗi của hệ thống.
+
+---
+
+# Tính năng mới 1
+
+## Priority-Based Topic Classification and Monitoring
+
+### Mô tả
+
+Bổ sung khả năng phân loại Topic theo mức độ ưu tiên.
+
+### Các mức ưu tiên
+
+| Topic       | Priority |
+| ----------- | -------- |
+| high-alert  | HIGH     |
+| normal-task | NORMAL   |
+| low-log     | LOW      |
+
+### Lợi ích
+
+* Hỗ trợ quản trị viên nhận biết Topic quan trọng.
+* Tăng khả năng giám sát hệ thống.
+* Là cơ sở để phát triển cơ chế xử lý ưu tiên trong tương lai.
+
+---
+
+# Tính năng mới 2
+
+## Consumer Uptime Monitoring
+
+### Mô tả
+
+Bổ sung khả năng theo dõi thời gian hoạt động của Consumer trên giao diện NSQ Admin.
+
+### Chức năng
+
+Hiển thị thời gian kết nối của Consumer:
+
+```text
+28m57s
+30m21s
+1h12m
+```
+
+### Lợi ích
+
+* Theo dõi độ ổn định của Consumer.
+* Hỗ trợ giám sát hệ thống phân tán.
+* Hỗ trợ phát hiện Consumer khởi động lại bất thường.
+
+---
+
+## Kiến thức hệ phân tán được áp dụng
+
+* Distributed Messaging
+* Publish / Subscribe
+* Service Discovery
+* Load Balancing
+* Fault Tolerance
+* Monitoring
+* Distributed Consumer Management
+
+---
+
+## Kết quả đạt được
+
+### Hoàn thành
+
+* Cài đặt thành công NSQ
+* Thực nghiệm Producer - Consumer
+* Kiểm thử Load Balancing
+* Kiểm thử Fault Tolerance
+* Phát triển 2 tính năng mới
+* Quản lý mã nguồn bằng GitHub
+
+### Công nghệ sử dụng
+
+* Golang
+* NSQ
+* GitHub
+* GitHub Codespaces
+
+---
+
+## Tác giả
+
+Nguyễn Nguyên
+
+Môn học: Ứng dụng phân tán
+
+Trường Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh
