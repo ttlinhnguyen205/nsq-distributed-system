@@ -6,7 +6,6 @@
 
 Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ thống hàng đợi thông điệp phân tán, khả năng cân bằng tải, khả năng chịu lỗi và phát triển thêm các tính năng giám sát phục vụ quản trị hệ thống.
 
----
 
 ## Dự án gốc
 
@@ -14,7 +13,6 @@ Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ t
 * Ngôn ngữ: Golang
 * Kiến trúc: Distributed Messaging System
 
----
 
 ## Mục tiêu
 
@@ -25,7 +23,6 @@ Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ t
 * Đánh giá khả năng chịu lỗi (Fault Tolerance)
 * Phát triển các tính năng mới liên quan đến hệ thống phân tán
 
----
 
 ## Kiến trúc hệ thống
 
@@ -54,7 +51,6 @@ Hệ thống bao gồm:
 
 * Nhận và xử lý thông điệp từ Topic
 
----
 
 ## Cài đặt
 
@@ -93,7 +89,6 @@ go run ./apps/nsqd --lookupd-tcp-address=127.0.0.1:4160
 go run ./apps/nsqadmin --lookupd-http-address=127.0.0.1:4161
 ```
 
----
 
 ## Thực nghiệm
 
@@ -133,8 +128,6 @@ done
 
 Điều này chứng minh NSQ hỗ trợ cân bằng tải giữa các Consumer.
 
----
-
 ## Kiểm thử khả năng chịu lỗi (Fault Tolerance)
 
 Dừng Consumer A:
@@ -159,8 +152,6 @@ done
 
 Điều này chứng minh khả năng chịu lỗi của hệ thống.
 
----
-
 # Tính năng mới 1
 
 ## Priority-Based Topic Classification and Monitoring
@@ -182,8 +173,6 @@ Bổ sung khả năng phân loại Topic theo mức độ ưu tiên.
 * Hỗ trợ quản trị viên nhận biết Topic quan trọng.
 * Tăng khả năng giám sát hệ thống.
 * Là cơ sở để phát triển cơ chế xử lý ưu tiên trong tương lai.
-
----
 
 # Tính năng mới 2
 
@@ -209,8 +198,6 @@ Hiển thị thời gian kết nối của Consumer:
 * Hỗ trợ giám sát hệ thống phân tán.
 * Hỗ trợ phát hiện Consumer khởi động lại bất thường.
 
----
-
 ## Kiến thức hệ phân tán được áp dụng
 
 * Distributed Messaging
@@ -220,8 +207,6 @@ Hiển thị thời gian kết nối của Consumer:
 * Fault Tolerance
 * Monitoring
 * Distributed Consumer Management
-
----
 
 ## Kết quả đạt được
 
