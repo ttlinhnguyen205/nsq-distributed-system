@@ -241,12 +241,3 @@ Hiển thị thời gian kết nối của Consumer:
 * GitHub
 * GitHub Codespaces
 
----
-
-## Tác giả
-
-Nguyễn Nguyên
-
-Môn học: Ứng dụng phân tán
-
-Trường Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh
