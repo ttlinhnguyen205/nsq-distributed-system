@@ -197,7 +197,6 @@
         <table class="table table-bordered table-condensed">
             <tr>
                 <th>Client Host</th>
-                <th>Health Status</th>
                 <th>User-Agent</th>
                 <th>Attributes</th>
                 <th>NSQd Host</th>
@@ -211,13 +210,6 @@
             {{#each clients}}
             <tr class={{#if (and node_topology_zone (eq topology_zone node_topology_zone))}}"bg-zone-local"{{/if}}{{#if (and node_topology_region (eq topology_region node_topology_region))}}"bg-region-local"{{/if}}>
                 <td title="{{remote_address}}">{{hostname_port}}{{#if show_client_id}} ({{client_id}}){{/if}}</td>
-                <td>
-                    {{#if ready_count}}
-                        <span class="label label-success">ONLINE</span>
-                    {{else}}
-                        <span class="label label-warning">WARNING</span>
-                    {{/if}}
-                </td>
                 <td>{{#if user_agent.length}}<small>{{user_agent}}</small>{{/if}}</td>
                 <td>
                     {{#if sample_rate}}
