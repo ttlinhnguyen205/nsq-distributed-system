@@ -28,26 +28,26 @@ Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ t
 
 Hệ thống bao gồm:
 
-### NSQLookupd
+1. NSQLookupd
 
 * Quản lý thông tin các node NSQ
 * Hỗ trợ khám phá dịch vụ (Service Discovery)
 
-### NSQD
+2. NSQD
 
 * Tiếp nhận thông điệp từ Producer
 * Lưu trữ và phân phối thông điệp đến Consumer
 
-### NSQAdmin
+3. NSQAdmin
 
 * Giao diện quản trị hệ thống
 * Theo dõi Topic, Channel và Consumer
 
-### Producer
+4.Producer
 
 * Gửi thông điệp vào Topic
 
-### Consumer
+Consumer
 
 * Nhận và xử lý thông điệp từ Topic
 
@@ -71,19 +71,19 @@ make
 
 ## Khởi động hệ thống
 
-### Terminal 1
+#### Terminal 1
 
 ```bash
 go run ./apps/nsqlookupd
 ```
 
-### Terminal 2
+#### Terminal 2
 
 ```bash
 go run ./apps/nsqd --lookupd-tcp-address=127.0.0.1:4160
 ```
 
-### Terminal 3
+#### Terminal 3
 
 ```bash
 go run ./apps/nsqadmin --lookupd-http-address=127.0.0.1:4161
@@ -92,7 +92,7 @@ go run ./apps/nsqadmin --lookupd-http-address=127.0.0.1:4161
 
 ## Thực nghiệm
 
-### Kiểm thử cân bằng tải (Load Balancing)
+#### Kiểm thử cân bằng tải (Load Balancing)
 
 Khởi động 2 Consumer:
 
@@ -121,7 +121,7 @@ curl -s -d "Distributed Message $i" \
 done
 ```
 
-### Kết quả
+#### Kết quả
 
 * Consumer A nhận một phần thông điệp
 * Consumer B nhận một phần thông điệp
@@ -145,7 +145,7 @@ curl -s -d "Message $i" \
 done
 ```
 
-### Kết quả
+#### Kết quả
 
 * Consumer B vẫn tiếp tục nhận và xử lý toàn bộ thông điệp.
 * Hệ thống vẫn hoạt động bình thường khi một Consumer ngừng hoạt động.
