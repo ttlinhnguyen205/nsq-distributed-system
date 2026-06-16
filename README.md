@@ -43,7 +43,7 @@ Hệ thống bao gồm:
 * Giao diện quản trị hệ thống
 * Theo dõi Topic, Channel và Consumer
 
-4.Producer
+4. Producer
 
 * Gửi thông điệp vào Topic
 
