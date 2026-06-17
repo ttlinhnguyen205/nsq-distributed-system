@@ -13,33 +13,67 @@
         <table class="table table-condensed table-bordered">
             <tr>
                 <th>Topic</th>
-                <th width="100">Priority</th>
+                <th width="120">Priority</th>
                 {{#if graph_active}}<th width="120">Depth</th>{{/if}}
                 {{#if graph_active}}<th width="120">Messages</th>{{/if}}
                 {{#if graph_active}}<th width="120">Rate</th>{{/if}}
             </tr>
-            {{#each collection}}
-            <tr>
-                <td><a class="link" href="{{basePath "/topics"}}/{{urlencode name}}">{{name}}</a></td>
-                <td>
-                    {{#if_high_priority name}}
-                        <span class="label label-danger">HIGH</span>
+
+```
+        {{#each collection}}
+        <tr>
+            <td>
+                <a class="link" href="{{basePath "/topics"}}/{{urlencode name}}">
+                    {{name}}
+                </a>
+            </td>
+
+            <td>
+                {{#if_high_priority name}}
+                    <span class="label label-danger">HIGH</span>
+                {{else}}
+                    {{#if_normal_priority name}}
+                        <span class="label label-warning">NORMAL</span>
                     {{else}}
-                        {{#if_normal_priority name}}
-                            <span class="label label-warning">NORMAL</span>
-                        {{else}}
-                            <span class="label label-success">LOW</span>
-                        {{/if_normal_priority}}
-                    {{/if_high_priority}}
-                </td>
-                {{#if ../graph_active}}<td><a class="link" href="{{basePath "/topics"}}/{{urlencode name}}"><img width="120" height="20" src="{{sparkline "topic" "" name "" "depth"}}"></a></td>{{/if}}
-                {{#if ../graph_active}}<td><a class="link" href="{{basePath "/topics"}}/{{urlencode name}}"><img width="120" height="20" src="{{sparkline "topic" "" name "" "message_count"}}"></a></td>{{/if}}
-                {{#if ../graph_active}}<td class="bold rate" target="{{rate "topic" "*" name ""}}"></td>{{/if}}
-            </tr>
-            {{/each}}
-        </table>
-    {{else}}
-        <div class="alert alert-warning"><h4>Notice</h4>No Topics Found</div>
-    {{/if}}
+                        <span class="label label-success">LOW</span>
+                    {{/if_normal_priority}}
+                {{/if_high_priority}}
+            </td>
+
+            {{#if ../graph_active}}
+            <td>
+                <a class="link" href="{{basePath "/topics"}}/{{urlencode name}}">
+                    <img width="120" height="20"
+                         src="{{sparkline "topic" "" name "" "depth"}}">
+                </a>
+            </td>
+            {{/if}}
+
+            {{#if ../graph_active}}
+            <td>
+                <a class="link" href="{{basePath "/topics"}}/{{urlencode name}}">
+                    <img width="120" height="20"
+                         src="{{sparkline "topic" "" name "" "message_count"}}">
+                </a>
+            </td>
+            {{/if}}
+
+            {{#if ../graph_active}}
+            <td class="bold rate"
+                target="{{rate "topic" "*" name ""}}">
+            </td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </table>
+
+{{else}}
+    <div class="alert alert-warning">
+        <h4>Notice</h4>
+        No Topics Found
     </div>
+{{/if}}
+</div>
+```
+
 </div>
