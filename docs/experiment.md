@@ -4,7 +4,6 @@
 
 Thực nghiệm được tiến hành nhằm đánh giá khả năng xử lý thông điệp trong môi trường phân tán của nền tảng NSQ, đồng thời kiểm tra các đặc tính quan trọng của hệ thống bao gồm khả năng cân bằng tải (Load Balancing) và khả năng chịu lỗi (Fault Tolerance).
 
-
 ## 2. Môi trường thực nghiệm
 
 | Thành phần                 | Cấu hình                   |
@@ -12,11 +11,10 @@ Thực nghiệm được tiến hành nhằm đánh giá khả năng xử lý th
 | Nền tảng thực thi          | GitHub Codespaces          |
 | Hệ điều hành               | Ubuntu Linux               |
 | Ngôn ngữ lập trình         | Golang                     |
-| Hệ thống truyền thông điệp | NSQ 1.3.0                  |
+| Hệ thống truyền thông điệp | NSQ                        |
 | Công cụ quản trị           | NSQAdmin                   |
 | Thành phần sử dụng         | nsqlookupd, nsqd, nsqadmin |
 | Consumer                   | Consumer A, Consumer B     |
-
 
 ## 3. Thiết lập thực nghiệm
 
@@ -27,7 +25,6 @@ Hệ thống được cấu hình với:
 * Số lượng Consumer: **02**
 
 Hai Consumer cùng đăng ký nhận thông điệp từ một Channel nhằm mô phỏng môi trường xử lý phân tán với nhiều tiến trình tiêu thụ dữ liệu đồng thời.
-
 
 ## 4. Kết quả kiểm tra cân bằng tải (Load Balancing)
 
@@ -53,12 +50,11 @@ Tiến hành dừng hoạt động Consumer A và tiếp tục gửi thêm 20 th
 
 * Consumer B tiếp tục nhận và xử lý toàn bộ các thông điệp mới.
 * Hệ thống không bị gián đoạn.
-* Không ghi nhận hiện tượng mất thông điệp trong quá trình thực nghiệm.
+* Không ghi nhận hiện tượng mất thông điệp trong phạm vi kịch bản thực nghiệm.
 
 ### Đánh giá
 
 Kết quả cho thấy NSQ vẫn duy trì hoạt động ổn định khi một Consumer gặp sự cố hoặc ngừng hoạt động. Điều này thể hiện khả năng chịu lỗi của hệ thống trong môi trường xử lý phân tán.
-
 
 ## 6. Kết luận
 
