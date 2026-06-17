@@ -14,8 +14,6 @@ Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ t
 * Kiến trúc: Distributed Messaging System
 * Giấy phép: MIT License
 
----
-
 ## Mục tiêu
 
 * Tìm hiểu kiến trúc NSQ
