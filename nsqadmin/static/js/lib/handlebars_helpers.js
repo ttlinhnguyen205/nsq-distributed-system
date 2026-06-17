@@ -314,3 +314,19 @@ Handlebars.registerHelper('if_normal_priority', function(topicName, options) {
     }
     return options.inverse(this);
 });
+Handlebars.registerHelper('if_topic_alert', function(topicName, options) {
+    if (topicName && topicName.indexOf('high') !== -1) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+Handlebars.registerHelper('if_consumer_restarted', function(connected, options) {
+    // connected tính bằng nano giây
+    var oneMinute = 60 * 1000 * 1000 * 1000;
+
+    if (connected && connected < oneMinute) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
