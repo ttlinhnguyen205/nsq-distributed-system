@@ -162,9 +162,7 @@ done
 
 Kết quả cho thấy NSQ có khả năng chịu lỗi khi một Consumer ngừng hoạt động.
 
-# Tính năng mới 1
-
-## Priority Topic Monitoring
+# Tính năng mới 1: Priority Topic Monitoring
 
 ### Mô tả
 
@@ -186,9 +184,7 @@ Bổ sung khả năng phân loại Topic theo mức độ ưu tiên trên giao d
 * Là cơ sở để phát triển cơ chế xử lý ưu tiên trong tương lai
 
 
-# Tính năng mới 2
-
-## Consumer Uptime Monitoring
+# Tính năng mới 2: Consumer Uptime Monitoring
 
 ### Mô tả
 
