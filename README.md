@@ -6,7 +6,6 @@
 
 Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ thống hàng đợi thông điệp phân tán, khả năng cân bằng tải, khả năng chịu lỗi và phát triển thêm các tính năng giám sát phục vụ quản trị hệ thống.
 
-
 ## Dự án gốc
 
 * NSQ: https://github.com/nsqio/nsq
@@ -22,7 +21,6 @@ Mục tiêu của dự án là tìm hiểu cơ chế hoạt động của hệ t
 * Đánh giá khả năng cân bằng tải (Load Balancing)
 * Đánh giá khả năng chịu lỗi (Fault Tolerance)
 * Phát triển các tính năng mới liên quan đến hệ thống phân tán
-
 
 ## Kiến trúc hệ thống
 
@@ -54,7 +52,6 @@ Hệ thống bao gồm các thành phần chính:
 ### 5. Consumer
 
 * Nhận và xử lý thông điệp từ Topic thông qua Channel
-
 
 ## Cài đặt
 
@@ -136,7 +133,6 @@ done
 
 Kết quả cho thấy NSQ hỗ trợ cơ chế cân bằng tải trong môi trường phân tán.
 
-
 ## Kiểm thử khả năng chịu lỗi (Fault Tolerance)
 
 Dừng Consumer A:
@@ -162,7 +158,7 @@ done
 
 Kết quả cho thấy NSQ có khả năng chịu lỗi khi một Consumer ngừng hoạt động.
 
-# Tính năng mới 1: Priority Topic Monitoring
+# Tính năng mới 1: Priority-Based Topic Classification and Monitoring
 
 ### Mô tả
 
@@ -183,42 +179,41 @@ Bổ sung khả năng phân loại Topic theo mức độ ưu tiên trên giao d
 * Hỗ trợ ưu tiên theo dõi các luồng dữ liệu quan trọng
 * Là cơ sở để phát triển cơ chế xử lý ưu tiên trong tương lai
 
-
-# Tính năng mới 2: Consumer Uptime Monitoring
+# Tính năng mới 2: Consumer Health Monitoring
 
 ### Mô tả
 
-Bổ sung khả năng theo dõi thời gian hoạt động của Consumer trên giao diện NSQAdmin.
+Bổ sung khả năng theo dõi trạng thái hoạt động của Consumer trên giao diện NSQAdmin.
 
 ### Chức năng
 
-Hiển thị thời gian kết nối của Consumer:
+Hiển thị trạng thái hoạt động (Health Status) và thời gian hoạt động (Uptime) của Consumer.
+
+Ví dụ:
 
 ```text
-28m57s
-30m21s
-1h12m
+HEALTHY   | 28m57s
+HEALTHY   | 30m21s
+RESTARTED | 0m15s
 ```
 
 ### Lợi ích
 
-* Theo dõi độ ổn định của Consumer
+* Theo dõi trạng thái hoạt động của Consumer
 * Hỗ trợ giám sát hệ thống phân tán
-* Hỗ trợ phát hiện Consumer khởi động lại bất thường
-* Hỗ trợ quản trị viên đánh giá trạng thái hoạt động của Consumer
+* Phát hiện Consumer vừa khởi động lại
+* Hỗ trợ quản trị viên đánh giá độ ổn định của Consumer
 
 ## Kết quả thực nghiệm
 
-| Nội dung                          | Kết quả    |
-| --------------------------------- | ---------- |
-| NSQ Installation                  | Thành công |
-| Producer – Consumer Communication | Thành công |
-| Load Balancing                    | Thành công |
-| Fault Tolerance                   | Thành công |
-| Priority Topic Monitoring         | Thành công |
-| Consumer Uptime Monitoring        | Thành công |
-
----
+| Nội dung                                           | Kết quả    |
+| -------------------------------------------------- | ---------- |
+| NSQ Installation                                   | Thành công |
+| Producer – Consumer Communication                  | Thành công |
+| Load Balancing                                     | Thành công |
+| Fault Tolerance                                    | Thành công |
+| Priority-Based Topic Classification and Monitoring | Thành công |
+| Consumer Health Monitoring                         | Thành công |
 
 ## Kiến thức hệ phân tán được áp dụng
 
@@ -230,7 +225,6 @@ Hiển thị thời gian kết nối của Consumer:
 * Monitoring
 * Distributed Consumer Management
 
-
 ## Công nghệ sử dụng
 
 * Golang
@@ -238,15 +232,19 @@ Hiển thị thời gian kết nối của Consumer:
 * GitHub
 * GitHub Codespaces
 
-
 ## Thành viên thực hiện
 
-| Họ tên               | Công việc                                                                                              |
-| -------------------- | ------------------------------------------------------------------------------------------------------ |
-| Nguyễn Thị Thuỳ Linh | Cài đặt và cấu hình hệ thống NSQ, phát triển tính năng Priority Topic Monitoring, xây dựng báo cáo     |
-| Nguyễn Anh Quân      | Thực nghiệm hệ thống, phát triển tính năng Consumer Uptime Monitoring, kiểm thử và hoàn thiện tài liệu |
+| Họ tên               | Công việc                                                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Nguyễn Thị Thuỳ Linh | Cài đặt và cấu hình hệ thống NSQ, phát triển tính năng Priority-Based Topic Classification and Monitoring, xây dựng báo cáo |
+| Nguyễn Anh Quân      | Thực nghiệm hệ thống, phát triển tính năng Consumer Health Monitoring, kiểm thử và hoàn thiện tài liệu                      |
 
+## Future Work
+
+* Dead Letter Queue (DLQ)
+* Consumer Failure Detection
+* Multi-Node Monitoring
 
 ## Kết luận
 
-Dự án đã cài đặt và thực nghiệm thành công hệ thống truyền thông điệp phân tán NSQ. Nhóm đã đánh giá được các đặc tính quan trọng của hệ thống gồm khả năng cân bằng tải và khả năng chịu lỗi. Đồng thời nhóm đã phát triển thành công hai tính năng mới là Priority Topic Monitoring và Consumer Uptime Monitoring nhằm hỗ trợ giám sát và quản trị hệ thống phân tán hiệu quả hơn.
+Dự án đã cài đặt và thực nghiệm thành công hệ thống truyền thông điệp phân tán NSQ. Nhóm đã đánh giá được các đặc tính quan trọng của hệ thống gồm khả năng cân bằng tải và khả năng chịu lỗi. Đồng thời nhóm đã phát triển thành công hai tính năng mới là Priority-Based Topic Classification and Monitoring và Consumer Health Monitoring nhằm hỗ trợ giám sát và quản trị hệ thống phân tán hiệu quả hơn.
