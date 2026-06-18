@@ -330,3 +330,44 @@ Handlebars.registerHelper('if_consumer_restarted', function(connected, options) 
     }
     return options.inverse(this);
 });
+Handlebars.registerHelper('consumer_load_level', function(messageCount) {
+    messageCount = messageCount || 0;
+
+    if (messageCount >= 100) {
+        return 'HIGH LOAD';
+    } else if (messageCount >= 20) {
+        return 'MEDIUM LOAD';
+    }
+    return 'LOW LOAD';
+});
+
+Handlebars.registerHelper('consumer_load_class', function(messageCount) {
+    messageCount = messageCount || 0;
+
+    if (messageCount >= 100) {
+        return 'label-danger';
+    } else if (messageCount >= 20) {
+        return 'label-warning';
+    }
+    return 'label-success';
+});
+
+Handlebars.registerHelper('node_health_status', function(topicCount, channelCount) {
+    topicCount = topicCount || 0;
+    channelCount = channelCount || 0;
+
+    if (topicCount > 0 || channelCount > 0) {
+        return 'UP';
+    }
+    return 'WARNING';
+});
+
+Handlebars.registerHelper('node_health_class', function(topicCount, channelCount) {
+    topicCount = topicCount || 0;
+    channelCount = channelCount || 0;
+
+    if (topicCount > 0 || channelCount > 0) {
+        return 'label-success';
+    }
+    return 'label-warning';
+});
