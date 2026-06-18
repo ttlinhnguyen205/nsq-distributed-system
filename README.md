@@ -158,62 +158,76 @@ done
 
 Kết quả cho thấy NSQ có khả năng chịu lỗi khi một Consumer ngừng hoạt động.
 
-# Tính năng mới 1: Priority-Based Topic Classification and Monitoring
+# Tính năng mới 1: Consumer Load Balancing Monitor
 
 ### Mô tả
 
-Bổ sung khả năng phân loại Topic theo mức độ ưu tiên trên giao diện NSQAdmin.
+Bổ sung khả năng giám sát mức tải xử lý của Consumer trên giao diện NSQAdmin.
 
-### Các mức ưu tiên
+Hệ thống tự động đánh giá mức tải dựa trên số lượng thông điệp mà Consumer đã xử lý và hiển thị trực quan dưới dạng Load Level.
 
-| Topic       | Priority |
-| ----------- | -------- |
-| high-alert  | HIGH     |
-| normal-task | NORMAL   |
-| low-log     | LOW      |
+### Các mức tải
+
+| Load Level  | Ý nghĩa                                       |
+| ----------- | --------------------------------------------- |
+| HIGH LOAD   | Consumer đang xử lý khối lượng thông điệp lớn |
+| MEDIUM LOAD | Consumer đang xử lý mức tải trung bình        |
+| LOW LOAD    | Consumer đang xử lý ít thông điệp             |
 
 ### Lợi ích
 
-* Hỗ trợ quản trị viên nhận biết Topic quan trọng
-* Tăng khả năng giám sát hệ thống
-* Hỗ trợ ưu tiên theo dõi các luồng dữ liệu quan trọng
-* Là cơ sở để phát triển cơ chế xử lý ưu tiên trong tương lai
+* Hỗ trợ giám sát hoạt động cân bằng tải giữa các Consumer
+* Giúp phát hiện Consumer đang quá tải
+* Hỗ trợ đánh giá hiệu quả phân phối thông điệp của hệ thống
+* Cung cấp thông tin trực quan cho quản trị viên
 
-# Tính năng mới 2: Consumer Health Monitoring
+### Kiến thức hệ phân tán áp dụng
+
+* Load Balancing
+* Scalability
+* Distributed Message Processing
+
+# Tính năng mới 2: Distributed Node Health Monitoring
 
 ### Mô tả
 
-Bổ sung khả năng theo dõi trạng thái hoạt động của Consumer trên giao diện NSQAdmin.
+Bổ sung khả năng giám sát trạng thái hoạt động của các node NSQD trên giao diện NSQAdmin.
 
-### Chức năng
+Hệ thống tự động kiểm tra trạng thái kết nối của node và hiển thị thông tin Node Health cho quản trị viên.
 
-Hiển thị trạng thái hoạt động (Health Status) và thời gian hoạt động (Uptime) của Consumer.
+### Trạng thái hỗ trợ
 
-Ví dụ:
-
-```text
-HEALTHY   | 28m57s
-HEALTHY   | 30m21s
-RESTARTED | 0m15s
-```
+| Node Health | Ý nghĩa                                               |
+| ----------- | ----------------------------------------------------- |
+| UP          | Node hoạt động bình thường                            |
+| WARNING     | Node có dấu hiệu bất thường hoặc mất kết nối một phần |
 
 ### Lợi ích
 
-* Theo dõi trạng thái hoạt động của Consumer
-* Hỗ trợ giám sát hệ thống phân tán
-* Phát hiện Consumer vừa khởi động lại
-* Hỗ trợ quản trị viên đánh giá độ ổn định của Consumer
+* Hỗ trợ giám sát tình trạng hoạt động của các node phân tán
+* Phát hiện sớm các sự cố trong hệ thống
+* Hỗ trợ đánh giá tính sẵn sàng của hệ thống
+* Nâng cao khả năng quản trị và vận hành
+
+### Kiến thức hệ phân tán áp dụng
+
+* Fault Detection
+* Fault Tolerance
+* Availability
+* Distributed Monitoring
+
 
 ## Kết quả thực nghiệm
 
-| Nội dung                                           | Kết quả    |
-| -------------------------------------------------- | ---------- |
-| NSQ Installation                                   | Thành công |
-| Producer – Consumer Communication                  | Thành công |
-| Load Balancing                                     | Thành công |
-| Fault Tolerance                                    | Thành công |
-| Priority-Based Topic Classification and Monitoring | Thành công |
-| Consumer Health Monitoring                         | Thành công |
+| Nội dung                           | Kết quả    |
+| ---------------------------------- | ---------- |
+| NSQ Installation                   | Thành công |
+| Producer – Consumer Communication  | Thành công |
+| Load Balancing                     | Thành công |
+| Fault Tolerance                    | Thành công |
+| Consumer Load Balancing Monitor    | Thành công |
+| Distributed Node Health Monitoring | Thành công |
+
 
 ## Kiến thức hệ phân tán được áp dụng
 
@@ -234,10 +248,11 @@ RESTARTED | 0m15s
 
 ## Thành viên thực hiện
 
-| Họ tên               | Công việc                                                                                                                   |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Nguyễn Thị Thuỳ Linh | Cài đặt và cấu hình hệ thống NSQ, phát triển tính năng Priority-Based Topic Classification and Monitoring, xây dựng báo cáo |
-| Nguyễn Anh Quân      | Thực nghiệm hệ thống, phát triển tính năng Consumer Health Monitoring, kiểm thử và hoàn thiện tài liệu                      |
+| Họ tên               | Công việc                                                                                                      |
+| -------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Nguyễn Thị Thuỳ Linh | Cài đặt và cấu hình hệ thống NSQ, phát triển tính năng Consumer Load Balancing Monitor, xây dựng báo cáo       |
+| Nguyễn Anh Quân      | Thực nghiệm hệ thống, phát triển tính năng Distributed Node Health Monitoring, kiểm thử và hoàn thiện tài liệu |
+
 
 ## Future Work
 
