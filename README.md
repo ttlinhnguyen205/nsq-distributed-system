@@ -1,5 +1,5 @@
 # NSQ Distributed Messaging System
-
+# Demo: 
 ## Giới thiệu
 
 Đây là dự án nghiên cứu và thực nghiệm hệ thống truyền thông điệp phân tán NSQ (NSQ Distributed Messaging Platform) được phát triển bằng Golang.
