@@ -21,6 +21,7 @@
                 {{#if nsqlookupd.length}}
                 <th>Lookupd Conns.</th>
                 {{/if}}
+                <th>Node Health</th>
                 <th>Topics</th>
             </tr>
             {{#each collection}}
@@ -40,6 +41,11 @@
                     </div>
                 </td>
                 {{/if}}
+                <td>
+                    <span class="label {{node_health_class topics.length remote_addresses.length}}">
+                        {{node_health_status topics.length remote_addresses.length}}
+                    </span>
+                </td>
                 <td>
                 {{#if topics.length}}
                     <span class="badge">{{topics.length}}</span>

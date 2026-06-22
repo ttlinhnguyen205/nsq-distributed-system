@@ -205,6 +205,8 @@
                 <th>Finished</th>
                 <th>Requeued</th>
                 <th>Messages</th>
+                <th>Load Level</th>
+                <th>Health Status</th>
                 <th>Uptime</th>
             </tr>
             {{#each clients}}
@@ -255,6 +257,21 @@
                 <td>{{commafy finish_count}}</td>
                 <td>{{commafy requeue_count}}</td>
                 <td>{{commafy message_count}}</td>
+
+                <td>
+                    <span class="label {{consumer_load_class message_count}}">
+                        {{consumer_load_level message_count}}
+                    </span>
+                </td>
+
+                <td>
+                    {{#if_consumer_restarted connected}}
+                        <span class="label label-warning">RESTARTED</span>
+                    {{else}}
+                        <span class="label label-success">HEALTHY</span>
+                    {{/if_consumer_restarted}}
+                </td>
+
                 <td>{{nanotohuman connected}}</td>
             </tr>
             {{/each}}
